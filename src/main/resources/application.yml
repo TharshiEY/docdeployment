@@ -1,0 +1,10 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /docservice
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: doc-service

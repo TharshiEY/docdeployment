@@ -1,0 +1,5 @@
+# application-dev.yml
+server:
+  port: 8088
+  servlet:
+    context-path: /qa-doc-service
