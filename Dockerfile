@@ -3,13 +3,15 @@
 #
 #ENTRYPOINT ["top", "-b"]
 
-FROM openjdk:17
+FROM openjdk:11
+
+WORKDIR /opt
 
 EXPOSE 8082
 
 LABEL maintainer="docService"
 
-COPY target/doc-service.jar /doc-service.jar
+COPY target/doc-service.jar /opt/doc-service.jar
 
 ENTRYPOINT ["java", "-jar", "/doc-service.jar"]
 
