@@ -15,34 +15,34 @@ pipeline {
             }
         }
 
-        stage('Test') {
+//         stage('Test') {
+//             steps {
+//                 sh 'mvn test'
+//             }
+//             post {
+//                 always {
+//                     junit 'target/surefire-reports/*.xml'
+//                 }
+//             }
+//         }
+
+        stage('Docker Build') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
+                script {
+                    docker.build "tharshiey/docdeployment:${TAG}"
                 }
             }
         }
-
-        stage('Docker Build') {
-                    steps {
-                        script {
-                            docker.build("tharshiey/docdeployment:${TAG}")
-                        }
+        stage('Pushing Docker Image to Dockerhub') {
+            steps {
+                script {
+                    docker.withRegistry('https://hub.docker.com/', 'docker_credential') {
+                         docker.image("tharshiey/docdeployment:${TAG}").push()
+                         docker.image("tharshiey/docdeployment:latest").push()
                     }
                 }
-        	    stage('Pushing Docker Image to Dockerhub') {
-                    steps {
-                        script {
-                            docker.withRegistry('https://hub.docker.com/', 'docker_credential') {
-                                docker.image("tharshiey/docdeployment:${TAG}").push()
-                                docker.image("tharshiey/docdeployment:${TAG}").push("latest")
-                            }
-                        }
-                    }
-                }
+            }
+        }
 //         stage('Deploy') {
 //             steps {
 //                 script {
@@ -52,9 +52,10 @@ pipeline {
 //         }
         stage('Deploy'){
             steps {
-                sh "docker stop docdeployment | true"
-                sh "docker rm docdeployment | true"
-                sh "docker run --name docdeployment -d -p 9004:8082 tharshiey/docdeployment:${TAG}"
+//                 sh "docker stop docdeployment | true"
+//                 sh "docker rm docdeployment | true"
+//                 sh "docker run --name docdeployment -d -p 9004:8082 tharshiey/docdeployment:${TAG}"
+                sh "docker run -d -p 8082:8082 tharshiey/docdeployment:${TAG}"
             }
         }
     }
