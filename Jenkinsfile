@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                          deploy adapters: [tomcat9(credentialsId: 'tomcat_credential', path: '', url: 'http://dayal-test.letspractice.tk:8081')], contextPath: '/pipeline', onFailure: false, jar: 'webapp/target/*.jar'
+                          deploy adapters: [tomcat9(credentialsId: 'tomcat_credential', path: '', url: 'http://dayal-test.letspractice.tk:8081')], contextPath: '/pipeline', onFailure: false, jar: 'target/*.jar'
                         }
 //                 sh 'make publish'
             }
