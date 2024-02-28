@@ -16,10 +16,10 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                sh 'make publish'
-            }
-        }
+//         stage('Deploy') {
+//             steps {
+//                 sh 'make publish'
+//             }
+//         }
     }
 }
