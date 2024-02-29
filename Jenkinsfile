@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t tharshiey/docdeployment:${TAG} .'
-                    sh 'docker tag tharshiey/docdeployment:24.2.33 tharshiey/docdeployment:latest'
+                    sh 'docker tag tharshiey/docdeployment:${TAG} tharshiey/docdeployment:latest'
 
                 }
             }
