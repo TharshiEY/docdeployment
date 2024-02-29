@@ -10,8 +10,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
-//                 sh 'mvn clean package'
+//                 sh 'mvn -B -DskipTests clean package'
+                sh 'mvn clean package'
             }
         }
         // stage('Install Docker') {
@@ -68,19 +68,13 @@ pipeline {
                 }
             }
         }
-//         stage('Deploy') {
-//             steps {
-//                 script {
-//                           deploy adapters: [tomcat9(credentialsId: 'tomcat_credential', path: '', url: 'http://dayal-test.letspractice.tk:8081')], contextPath: '/pipeline', onFailure: false, jar: 'target/*.jar'
-//                         }
-//             }
-//         }
+
         stage('Deploy'){
             steps {
-//                 sh "docker stop docdeployment | true"
-//                 sh "docker rm docdeployment | true"
-//                 sh "docker run --name docdeployment -d -p 9004:8082 tharshiey/docdeployment:${TAG}"
-                sh "docker run -d -p 8082:8082 tharshiey/docdeployment:${TAG}"
+                sh "docker stop docdeployment | true"
+                sh "docker rm docdeployment | true"
+                sh "docker run --name docdeployment -d -p 8082:8082 tharshiey/docdeployment:${TAG}"
+//                 sh "docker run -d -p 8082:8082 tharshiey/docdeployment:${TAG}"
             }
         }
     }
