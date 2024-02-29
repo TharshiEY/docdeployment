@@ -44,7 +44,7 @@ pipeline {
 //                          docker.image("tharshiey/docdeployment:latest").push()
                     sh 'docker push tharshiey/docdeployment:24.2.33'
                     sh 'docker push tharshiey/docdeployment:latest'
-                    }
+//                     }
                 }
             }
         }
