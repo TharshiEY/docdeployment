@@ -14,6 +14,13 @@ pipeline {
 //                 sh 'mvn clean package'
             }
         }
+        stage('Verify Docker') {
+             steps {
+                  script {
+                      sh 'docker --version'
+                  }
+             }
+        }
 
 //         stage('Test') {
 //             steps {
