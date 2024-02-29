@@ -29,16 +29,21 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build "tharshiey/docdeployment:${TAG}"
+                    sh 'docker build -t tharshiey/docdeployment:${TAG} .'
+                    sh 'docker tag tharshiey/docdeployment:24.2.33 tharshiey/docdeployment:latest'
+
                 }
             }
         }
         stage('Pushing Docker Image to Dockerhub') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_credential') {
-                         docker.image("tharshiey/docdeployment:${TAG}").push()
-                         docker.image("tharshiey/docdeployment:latest").push()
+                    sh 'docker login -u tharshiey -p Test_1user'
+//                     docker.withRegistry('https://registry.hub.docker.com', 'docker_credential') {
+//                          docker.image("tharshiey/docdeployment:${TAG}").push()
+//                          docker.image("tharshiey/docdeployment:latest").push()
+                    sh 'docker push tharshiey/docdeployment:24.2.33'
+                    sh 'docker push tharshiey/docdeployment:latest'
                     }
                 }
             }
