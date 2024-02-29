@@ -6,6 +6,8 @@ pipeline {
     environment {
         DATE = new Date().format('yy.M')
         TAG = "${DATE}.${BUILD_NUMBER}"
+        DOCKER_USERNAME = 'tharshiey'
+        DOCKER_PASSWORD = 'Test_1user'
     }
     stages {
         stage('Build') {
@@ -58,7 +60,8 @@ pipeline {
         stage('Pushing Docker Image to Dockerhub') {
             steps {
                 script {
-                    sh 'docker login -u tharshiey -p Test_1user'
+//                     sh 'docker login -u docker_credential -p Test_1user'
+                       sh "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin"
 //                     docker.withRegistry('https://registry.hub.docker.com', 'docker_credential') {
 //                          docker.image("tharshiey/docdeployment:${TAG}").push()
 //                          docker.image("tharshiey/docdeployment:latest").push()
