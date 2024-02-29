@@ -18,7 +18,8 @@ pipeline {
             steps {
                 script {
                     sh 'curl -fsSL https://get.docker.com -o get-docker.sh'
-                    sh 'sh get-docker.sh'
+                    sh 'chmod +x get-docker.sh'
+                    sh './get-docker.sh'
                 }
             }
         }
