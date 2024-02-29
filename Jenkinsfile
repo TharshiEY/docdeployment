@@ -64,7 +64,7 @@ pipeline {
                          docker.image("tharshiey/docdeployment:latest").push()
                     // sh 'docker push tharshiey/docdeployment:${TAG}'
                     // sh 'docker push tharshiey/docdeployment:latest'
-//                     }
+                    }
                 }
             }
         }
