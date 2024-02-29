@@ -62,7 +62,7 @@ pipeline {
 //                     docker.withRegistry('https://registry.hub.docker.com', 'docker_credential') {
 //                          docker.image("tharshiey/docdeployment:${TAG}").push()
 //                          docker.image("tharshiey/docdeployment:latest").push()
-                    sh 'docker push tharshiey/docdeployment:24.2.33'
+                    sh 'docker push tharshiey/docdeployment:${TAG}'
                     sh 'docker push tharshiey/docdeployment:latest'
 //                     }
                 }
