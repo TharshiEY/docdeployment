@@ -58,12 +58,12 @@ pipeline {
         stage('Pushing Docker Image to Dockerhub') {
             steps {
                 script {
-                    sh 'docker login -u tharshiey -p Test_1user'
-//                     docker.withRegistry('https://registry.hub.docker.com', 'docker_credential') {
-//                          docker.image("tharshiey/docdeployment:${TAG}").push()
-//                          docker.image("tharshiey/docdeployment:latest").push()
-                    sh 'docker push tharshiey/docdeployment:${TAG}'
-                    sh 'docker push tharshiey/docdeployment:latest'
+                    // sh 'docker login -u tharshiey -p Test_1user'
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker_credential') {
+                         docker.image("tharshiey/docdeployment:${TAG}").push()
+                         docker.image("tharshiey/docdeployment:latest").push()
+                    // sh 'docker push tharshiey/docdeployment:${TAG}'
+                    // sh 'docker push tharshiey/docdeployment:latest'
 //                     }
                 }
             }
